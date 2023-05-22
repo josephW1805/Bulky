@@ -1,5 +1,5 @@
-﻿using BulkyWeb.Data;
-using BulkyWeb.Models;
+﻿using Bulky.DataAccess.Data;
+using Bulky.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BulkyWeb.Controllers
@@ -33,14 +33,14 @@ namespace BulkyWeb.Controllers
             {
                 _db.Category.Add(obj);
                 _db.SaveChanges();
-				TempData["success"] = "Category created successfully";
+                TempData["success"] = "Category created successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View();
         }
 
-		public IActionResult Edit(int? id)
-		{
+        public IActionResult Edit(int? id)
+        {
             if (id is null || id == 0)
             {
                 return NotFound();
@@ -50,48 +50,48 @@ namespace BulkyWeb.Controllers
             {
                 return NotFound();
             }
-			return View(categoryFromDb);
-		}
+            return View(categoryFromDb);
+        }
 
-		[HttpPost]
-		public IActionResult Edit(Category obj)
-		{
-			if (ModelState.IsValid)
-			{
-				_db.Category.Update(obj);
-				_db.SaveChanges();
-				TempData["success"] = "Category updated successfully";
+        [HttpPost]
+        public IActionResult Edit(Category obj)
+        {
+            if (ModelState.IsValid)
+            {
+                _db.Category.Update(obj);
+                _db.SaveChanges();
+                TempData["success"] = "Category updated successfully";
 				return RedirectToAction(nameof(Index));
-			}
-			return View();
-		}
+            }
+            return View();
+        }
 
-		public IActionResult Delete(int? id)
-		{
+        public IActionResult Delete(int? id)
+        {
 			if (id is null || id == 0)
-			{
-				return NotFound();
-			}
-			Category? categoryFromDb = _db.Category.Find(id);
+            {
+                return NotFound();
+            }
+            Category? categoryFromDb = _db.Category.Find(id);
 			if (categoryFromDb is null)
-			{
-				return NotFound();
-			}
-			return View(categoryFromDb);
-		}
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+        }
 
-		[HttpPost, ActionName("Delete")]
-		public IActionResult DeletePOST(int? id)
-		{
-			Category? obj = _db.Category.Find(id);
-			if (obj is null)
-			{
-				return NotFound();
-			}
-			_db.Category.Remove(obj);
-			_db.SaveChanges();
-			TempData["success"] = "Category deleted successfully";
+        [HttpPost, ActionName("Delete")]
+        public IActionResult DeletePOST(int? id)
+        {
+            Category? obj = _db.Category.Find(id);
+            if (obj is null)
+            {
+                return NotFound();
+            }
+            _db.Category.Remove(obj);
+            _db.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
 			return RedirectToAction(nameof(Index));
-		}
-	}
+        }
+    }
 }
