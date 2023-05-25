@@ -20,7 +20,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
 
             return View(objProductList);
         }
@@ -29,12 +29,17 @@ namespace BulkyWeb.Areas.Admin.Controllers
         {
             ProductVM productVM = new()
             {
+                Product = new(),
                 CategoryList = _unitOfWork.Category.GetAll().Select(u => new SelectListItem
                 {
                     Text = u.Name,
                     Value = u.Id.ToString()
                 }),
-                Product = new Product()
+                CoverTypeList = _unitOfWork.CoverType.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                })
             };
 
             if(id is null || id == 0)
@@ -45,7 +50,7 @@ namespace BulkyWeb.Areas.Admin.Controllers
             else
             {
                 // update
-                productVM.Product = _unitOfWork.Product.Get(u => u.Id == id);
+                productVM.Product = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
                 return View(productVM);
             }
             
@@ -101,6 +106,11 @@ namespace BulkyWeb.Areas.Admin.Controllers
                     Text = u.Name,
                     Value = u.Id.ToString()
                 });
+                productVM.CoverTypeList = _unitOfWork.CoverType.GetAll().Select(u => new SelectListItem
+                {
+                    Text = u.Name,
+                    Value = u.Id.ToString()
+                });
                 return View(productVM);
             }
         }
@@ -109,14 +119,14 @@ namespace BulkyWeb.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category");
+            IEnumerable<Product> objProductList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
             return Json(new { data = objProductList });
         }
 
         [HttpDelete]
         public IActionResult Delete(int? id)
         {
-            var productToBeDeleted = _unitOfWork.Product.Get(u => u.Id == id);
+            var productToBeDeleted = _unitOfWork.Product.GetFirstOrDefault(u => u.Id == id);
             if(productToBeDeleted is null)
             {
                 return Json(new { success = false, message = "Error while deleting" });

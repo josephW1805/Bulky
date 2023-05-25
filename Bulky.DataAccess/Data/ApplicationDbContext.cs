@@ -1,9 +1,10 @@
 ﻿using Bulky.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bulky.DataAccess.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
         {
@@ -11,15 +12,24 @@ namespace Bulky.DataAccess.Data
         }
 
         public DbSet<Category> Category { get; set; }
+        public DbSet<CoverType> CoverType { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
                 new Category { Id = 2, Name = "SciFi", DisplayOrder = 2 },
                 new Category { Id = 3, Name = "History", DisplayOrder = 3 }
                 );
+
+            modelBuilder.Entity<CoverType>().HasData(
+                new CoverType { Id = 1, Name = "Hard Cover" },
+                new CoverType { Id = 2, Name = "Soft Cover" }
+            );
 
             modelBuilder.Entity<Product>().HasData(
                 new Product
@@ -34,6 +44,7 @@ namespace Bulky.DataAccess.Data
                     Price50 = 85,
                     Price100 = 80,
                     CategoryId = 1,
+                    CoverTypeId = 1,
                     ImageUrl = ""
                 },
                 new Product
@@ -48,6 +59,7 @@ namespace Bulky.DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 1,
+                    CoverTypeId = 1,
                     ImageUrl = ""
                 },
                 new Product
@@ -62,6 +74,7 @@ namespace Bulky.DataAccess.Data
                     Price50 = 40,
                     Price100 = 35,
                     CategoryId = 1,
+                    CoverTypeId = 2,
                     ImageUrl = ""
                 },
                 new Product
@@ -76,6 +89,7 @@ namespace Bulky.DataAccess.Data
                     Price50 = 60,
                     Price100 = 55,
                     CategoryId = 2,
+                    CoverTypeId = 2,
                     ImageUrl = ""
                 },
                 new Product
@@ -90,6 +104,7 @@ namespace Bulky.DataAccess.Data
                     Price50 = 25,
                     Price100 = 20,
                     CategoryId = 2,
+                    CoverTypeId = 1,
                     ImageUrl = ""
                 },
                 new Product
@@ -104,9 +119,9 @@ namespace Bulky.DataAccess.Data
                     Price50 = 22,
                     Price100 = 20,
                     CategoryId = 3,
+                    CoverTypeId = 2,
                     ImageUrl = ""
-                }
-                );
+                });
         }
     }
 }

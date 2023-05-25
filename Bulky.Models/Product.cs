@@ -33,6 +33,11 @@ namespace Bulky.Models
         public int CategoryId { get; set; }
         [ValidateNever]
         public Category Category { get; set; }
+        [Required]
+        [Display(Name = "Cover Type")]
+        public int CoverTypeId { get; set; }
+        [ValidateNever]
+        public CoverType CoverType { get; set; }
         [ValidateNever]
         public string ImageUrl { get; set; }
     }

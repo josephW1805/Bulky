@@ -390,7 +390,7 @@
     adapters.add("remote", ["url", "type", "additionalfields"], function (options) {
         var value = {
             url: options.params.url,
-            type: options.params.type || "GET",
+            type: options.params.type || "get",
             data: {}
         },
             prefix = getModelPrefix(options.element.name);

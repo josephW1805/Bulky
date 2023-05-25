@@ -79,7 +79,7 @@ const getElementFromSelector = element => {
 const getTransitionDurationFromElement = element => {
   if (!element) {
     return 0;
-  } // Get transition-duration of the element
+  } // get transition-duration of the element
 
 
   let {
