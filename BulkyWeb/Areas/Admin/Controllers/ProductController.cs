@@ -1,6 +1,6 @@
 ﻿using Bulky.DataAccess.Data.Repository.IRepository;
 using Bulky.Models;
-using Bulky.Models.VIewModels;
+using Bulky.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
