@@ -14,11 +14,18 @@ namespace Bulky.DataAccess.Data
         public DbSet<Category> Category { get; set; }
         public DbSet<CoverType> CoverType { get; set; }
         public DbSet<Product> Product { get; set; }
+        public DbSet<Company> Company { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Company>().HasData(
+                new Company { Id = 1, Name = "Readers Club", PhoneNumber = "1113335555", StreetAddress = "999 Main St", City = "Lala land", State = "NY", PostalCode = "99999" },
+                new Company { Id = 2, Name = "Tech Solution", PhoneNumber = "6669990000", StreetAddress = "123 Tech St", City = "Tech City", State = "IL", PostalCode = "12121" },
+                new Company { Id = 3, Name = "Vivid Books", PhoneNumber = "7779990000", StreetAddress = "999 Vid St", City = "Vid City", State = "IL", PostalCode = "66666" }
+                );
 
             modelBuilder.Entity<Category>().HasData(
                 new Category { Id = 1, Name = "Action", DisplayOrder = 1 },
