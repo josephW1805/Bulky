@@ -15,6 +15,7 @@ namespace Bulky.DataAccess.Data
         public DbSet<CoverType> CoverType { get; set; }
         public DbSet<Product> Product { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
