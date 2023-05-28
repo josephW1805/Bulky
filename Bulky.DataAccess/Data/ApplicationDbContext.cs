@@ -6,10 +6,7 @@ namespace Bulky.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
-        {
-
-        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Category> Category { get; set; }
         public DbSet<CoverType> CoverType { get; set; }
@@ -17,6 +14,8 @@ namespace Bulky.DataAccess.Data
         public DbSet<Company> Company { get; set; }
         public DbSet<ShoppingCart> ShoppingCart { get; set; }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<OrderHeader> OrderHeader { get; set; }
+        public DbSet<OrderDetail> OrderDetail { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

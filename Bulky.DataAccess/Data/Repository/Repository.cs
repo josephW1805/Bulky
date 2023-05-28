@@ -1,7 +1,6 @@
 ﻿using Bulky.DataAccess.Data.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace Bulky.DataAccess.Data.Repository
 {
