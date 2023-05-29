@@ -21,16 +21,16 @@ function loadDataTable() {
                 "render": function (data) {
                     return `
                         <div class="w-75 btn-group" role="group">
-                            <a href="/Admin/Product/Upsert?id=${data}" class="btn btn-primary mx-2">
+                            <a href="/admin/product/upsert?id=${data}" class="btn btn-primary mx-2">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
-                            <a onClick=Delete('/Admin/Product/Delete/${data}') class="btn btn-danger">
+                            <a onClick=Delete('/admin/product/delete/${data}') class="btn btn-danger">
                                 <i class="bi bi-trash"></i>
                             </a>
                         </div>
                     `
                 },
-                "width": "25%"
+                "width": "15%"
             },
         ],
         'columnDefs': [{
